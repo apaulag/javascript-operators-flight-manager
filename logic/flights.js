@@ -1,3 +1,5 @@
+const {calculateTotalDistance} = require('../logic/util');
+
 function Flights() {
     function calculateNumberOfFlights(passengers, capacity) {
         if (passengers < 0 || !Number.isInteger(passengers)) {
@@ -9,8 +11,9 @@ function Flights() {
         return Math.ceil(passengers / capacity);
     }
 
-    function checkAircraftRevision(distanceLimit, distancesArray) {
-        const totalDistance = distancesArray.reduce((sum, num) => sum + num, 0);
+    function checkAircraftRevision(distanceLimit, distances) {
+        const totalDistance = calculateTotalDistance(distances);
+
         if (totalDistance <= 0.5 * distanceLimit) {
             return "The revision needs to be done within the next 3 months";
         } else if (totalDistance <= 0.75 * distanceLimit) {

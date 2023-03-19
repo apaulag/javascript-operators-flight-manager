@@ -1,6 +1,9 @@
+const {calculateTotalNumberOfPassengers} = require('../logic/util');
+
 function Passengers() {
-    function checkFlightCapacity(capacity, passengerCountsArray) {
-        const totalPassengers = passengerCountsArray.reduce((sum, num) => sum + num, 0);
+    function checkFlightCapacity(capacity, passengerCounts) {
+        const totalPassengers = calculateTotalNumberOfPassengers(passengerCounts);
+
         if (totalPassengers <= capacity) {
             return totalPassengers;
         } else {
@@ -14,7 +17,7 @@ function Passengers() {
         const regularPassengersWithBusinessSeats = Math.min(regularPassengers, businessSeatsPerFlight * numFlights - vipPassengersWithBusinessSeats);
         const regularPassengersWithEconomySeats = Math.min(regularPassengers - regularPassengersWithBusinessSeats, economySeatsPerFlight * numFlights - vipPassengersWithEconomySeats);
 
-        return { vipPassengersWithBusinessSeats, vipPassengersWithEconomySeats, regularPassengersWithBusinessSeats, regularPassengersWithEconomySeats};
+        return {vipPassengersWithBusinessSeats, vipPassengersWithEconomySeats, regularPassengersWithBusinessSeats, regularPassengersWithEconomySeats};
     }
 
     return {checkFlightCapacity, distributeAllSeatsToAllPassengers};
